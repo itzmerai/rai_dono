@@ -61,7 +61,7 @@ export default function HomeScreen() {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.card}
-              onPress={() => router.push(`/manga/${item.slug}`)}
+              onPress={() => router.push({ pathname: '/manga/[slug]', params: { slug: item.slug } })}
             >
               <Image
                 source={{ uri: `https://meo.comick.pictures/${item.md_covers?.[0]?.b2key}` }}
