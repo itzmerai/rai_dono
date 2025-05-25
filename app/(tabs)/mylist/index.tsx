@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { RefreshControl, ScrollView, StyleSheet, Text } from 'react-native';
-import ComicList from '../../components/ComicList';
-import { getBookmarks } from '../../lib/storage/bookmarkStorage';
+import ComicList from '@/components/ComicList';
+import { getBookmarks } from '@/lib/storage/bookmarkStorage';
+import React, { useEffect, useState } from 'react';
+import { RefreshControl, ScrollView, Text } from 'react-native';
 
 export default function MyListScreen() {
   const [bookmarks, setBookmarks] = useState<any[]>([]);
@@ -24,19 +24,11 @@ export default function MyListScreen() {
 
   return (
     <ScrollView
-      style={{ padding: 16 }}
+      className="p-4"
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
     >
-      <Text style={styles.title}>My Bookmarked Comics</Text>
+      <Text className="text-xl font-bold mb-4">My Bookmarked Comics</Text>
       <ComicList comics={bookmarks} emptyMessage="No bookmarks yet." />
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-});
