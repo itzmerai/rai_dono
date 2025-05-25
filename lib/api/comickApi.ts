@@ -44,3 +44,9 @@ export const searchComics = async (query: string) => {
   const res = await fetch(`${BASE_URL}/v1.0/search/?q=${encodeURIComponent(query)}`);
   return res.json();
 };
+
+export const getChaptersBySlug = async (slug: string) => {
+  const res = await fetch(`https://api.comick.fun/comic/${slug}/chapters`);
+  const data = await res.json();
+  return data.chapters || [];
+};

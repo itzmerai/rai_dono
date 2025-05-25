@@ -1,21 +1,28 @@
-
 import ComicList from '@/components/ComicList';
 import HorizontalScroller from '@/components/HorizontalScroller';
 import { getTopComics } from '@/lib/api/comickApi';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
 
+type Comic = {
+  // Add the properties that a comic object should have, for example:
+  id: string;
+  title: string;
+  // Add other fields as needed
+};
+
 export default function HomeScreen() {
-  const [topComics, setTopComics] = useState([]);
+  const [topComics, setTopComics] = useState<Comic[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadComics = async () => {
       try {
         const data = await getTopComics();
-        setTopComics(data);
+        setTopComics(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Failed to load comics:', err);
+        setTopComics([]); // Ensure it's always an array on error
       } finally {
         setLoading(false);
       }
