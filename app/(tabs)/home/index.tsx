@@ -13,7 +13,7 @@ const HomeScreen = () => {
   useEffect(() => {
     fetch('https://api.comick.io/v1.0/search?sort=followed')
       .then((res) => res.json())
-      .then((data) => setTopComics(data))
+.then((data) => setTopComics(data?.results || []))
       .catch((err) => console.error(err));
   }, []);
 
